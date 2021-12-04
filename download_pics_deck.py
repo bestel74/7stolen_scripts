@@ -5,8 +5,8 @@ from bs4 import BeautifulSoup, SoupStrainer
 import urllib.request
 
 
-LOCAL_FOLDER_PATH       = "./pics/"
-LOCAL_DECK_FOLDER_PATH  = "./deck/"
+LOCAL_FOLDER_PATH       = "../pics/"
+LOCAL_DECK_FOLDER_PATH  = "../deck/"
 
 
 
@@ -136,8 +136,16 @@ get_codex_pics("LCDS", 'https://7fallen.com/fr/content/65-codex-miracle-lcds')
 get_codex_pics("TDLL", 'https://7fallen.com/fr/content/28-codex-temple-de-la-lumiere')
 get_codex_pics("Purete_celeste", 'https://7fallen.com/fr/content/30-codex-purete-celeste')
 get_codex_pics("LA VOIE", 'https://7fallen.com/fr/content/67-codex-la-voie')
+get_codex_pics("ANAYA", 'https://7fallen.com/fr/content/70-codex-anaya')
 
 get_immortel_list('https://7fallen.com/fr/content/41-deck-lists-des-heros')
+
+
+
+
+
+
+
 
 
 

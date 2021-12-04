@@ -24,9 +24,9 @@ print('--- MYSQL CONNECTION TEST STOP ---\n')
 
 MYSQL_TARGET_TABLE = "ALL_CARDS"
 
-LOCAL_FOLDER_PATH       = "./pics/"
-LOCAL_DECK_FOLDER_PATH  = "./deck/"
-LOCAL_REF_FOLDER_PATH   = "./ref/"
+LOCAL_FOLDER_PATH       = "../pics/"
+LOCAL_DECK_FOLDER_PATH  = "../deck/"
+LOCAL_REF_FOLDER_PATH   = "../ref/"
 
 MAX_COST_ALLOWED = int(10)
 NB_THRESHOLD_NUMBERS = 150
@@ -35,8 +35,8 @@ NB_THRESHOLD_NUMBERS = 150
 
 cards = []
 
-cards = [cv2.imread(file) for file in glob.glob("./pics/*/*.png")]
-cards += [cv2.imread(file) for file in glob.glob("./pics/*/*.jpg")]
+cards = [cv2.imread(file) for file in glob.glob("../pics/*/*.png")]
+cards += [cv2.imread(file) for file in glob.glob("../pics/*/*.jpg")]
 
 # TDLL TEST
 #cards = [cv2.imread(file) for file in glob.glob("./pics/*/*.png")]
@@ -491,10 +491,10 @@ for card in cards:
     encimg = cv2.imencode('.jpg', card, encode_param)[1].tobytes()
     
     if ctype != "ERROR":
-        sql_insert_blob_query = "INSERT INTO `"+MYSQL_TARGET_TABLE+"` (`cle`, `Carte`, `Faction`, `Type`, `Nom`, `Classe`, `Ec`, `Ft`, `Cout`, `Tmp`, `Atq`, `Fv`, `Bou`, `ado_cond`, `ado_rev`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+        sql_insert_blob_query = "INSERT INTO `"+MYSQL_TARGET_TABLE+"` (`cle`, `Carte`, `Faction`, `Type`, `Nom`, `Classe`, `Ec`, `Ft`, `Cout`, `Tmp`, `Atq`, `Fv`, `Bou`, `ado_cond`, `ado_rev`, `Capa`, `Texte`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, '', '');"
         insert_blob_tuple = (0, encimg, faction, ctype, name, classe, ec, tf, cost, tempest, atq, fv, bou, ad, adr)
     else:
-        sql_insert_blob_query = "INSERT INTO `"+MYSQL_TARGET_TABLE+"` (`Carte`, `Extension`, `Faction`, `Nom`, `Classe`) VALUES (%s, %s, %s, %s, %s);"
+        sql_insert_blob_query = "INSERT INTO `"+MYSQL_TARGET_TABLE+"` (`Carte`, `Extension`, `Faction`, `Nom`, `Classe`, `Ec`, `Ft`, `Cout`, `Tmp`, `Atq`, `Fv`, `Bou`, `ado_cond`, `ado_rev`, `Capa`, `Texte`, `Type`) VALUES (%s, %s, %s, %s, %s, '', '', '', '', '', '', '', '', '', '', '', '');"
         insert_blob_tuple = (encimg, 'Erreur', faction, name, classe)
  
     db_cursor.execute(sql_insert_blob_query, insert_blob_tuple)
